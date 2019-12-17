@@ -28,12 +28,13 @@ class rainDrop:
         self.horizspeed = self.horizspeed 
         self.canvas.move(self.rdrop, deltax, deltay)
         self.canvas.after(30, self.fall)
-        if self.canvas.coords(self.rdrop)[1]>= canvas.winfo_height() or self.canvas.coords(self.rdrop)[1]<= 0:
-            #print(self.canvas.coords(self.rdrop)[1])
+        if self.canvas.coords(self.rdrop)[3]>= canvas.winfo_height() and self.vertspeed>=0 or self.canvas.coords(self.rdrop)[1]<= 0 and self.vertspeed<=0:
+            # print(self.canvas.coords(self.rdrop))
             self.vertspeed = -random.uniform(0.1,1.5)*self.vertspeed
-        if self.canvas.coords(self.rdrop)[0] >= canvas.winfo_width() or self.canvas.coords(self.rdrop)[0] <=0:
+        if self.canvas.coords(self.rdrop)[0] >= canvas.winfo_width() and self.horizspeed >= 0 or self.canvas.coords(self.rdrop)[0] <=0 and self.horizspeed <= 0:
             self.horizspeed = -random.uniform(0.1,1.5)*self.horizspeed
             # self.canvas.coords(self.rdrop, self.x, 0, self.x, 30)
+
 
 
 
@@ -54,10 +55,10 @@ def pick_color():
     random.shuffle(colors)
     return colors[0]
 
-dropamount = 500
+dropamount = 100
 for drops in range(0,dropamount):
     #drops = rainDrop(canvas, W/2, H/2, random.uniform(-5,5), random.uniform(-5,5), pick_color())
-    drops = rainDrop(canvas, random.uniform(0,900), 450, -random.uniform(5,5),0, pick_color())
+    drops = rainDrop(canvas, random.uniform(0,900), 0, random.uniform(3,5),random.uniform(-5,5), pick_color())
     drops.fall()
 
 root.mainloop()
